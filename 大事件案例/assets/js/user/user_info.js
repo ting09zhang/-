@@ -27,4 +27,27 @@ $(function () {
       }
     })
   }
+
+  //重置表单数据
+  $('#btnReset').on('click', function (e) {
+    //阻止默认事件
+    e.preventDefault()
+    initUserInfo()
+  })
+
+  //监听表单的提交事件
+  $('.layui-form').on('submit', function (e) {
+    e.preventDefault()
+
+    $.ajax({
+      method: 'POST',
+      url: '/my/userinfo',
+      data: $(this).serialize(),
+      success: function (res) {
+        if (res.status !== 200) {
+          return
+        }
+      }
+    })
+  })
 })
